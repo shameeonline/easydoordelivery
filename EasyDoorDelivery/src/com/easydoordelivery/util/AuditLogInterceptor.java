@@ -30,6 +30,7 @@ public class AuditLogInterceptor extends EmptyInterceptor {
 			if (entity instanceof IAuditLog) {
 				inserts.add(entity);
 			}
+			System.out.println("Welcome");
 			return false;
 
 		}
