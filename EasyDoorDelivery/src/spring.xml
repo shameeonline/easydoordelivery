@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+   	<context:annotation-config />
+   	 
+   <bean id="dataSource" 
+      class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+      <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+      <property name="url" value="jdbc:mysql://localhost:3306/testeasydoordelivery"/>
+      <property name="username" value="shameer"/>
+      <property name="password" value="shameer"/>
+   </bean>
+
+   <bean id ="sessionFactory" class = "org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+  	 <property name="dataSource"  ref = "dataSource"></property>
+  	 <property name="packagesToScan" value = "com.easydoordelivery.model"></property>
+  	 <property name="hibernateProperties">
+  	 	<props>
+  	 		<prop key="dialect">org.hibernate.dialect.MySQLDialect</prop>
+  	 		<prop key="hibernate.show_sql">true</prop>
+            <!-- <prop key="hibernate.hbm2ddl.auto">create-drop</prop>  --> 
+             <prop key="hibernate.hbm2ddl.auto">update</prop>
+            
+   	 	</props>
+  	 </property>
+   </bean>
+  <bean id = "suppliersRepositoryImpl" class = "com.easydoordelivery.repository.impl.SuppliersRepositoryImpl" autowire = "byName"></bean>
+   <bean id = "categoriesRepositoryImpl" class = "com.easydoordelivery.repository.impl.CategoriesRepositoryImpl" autowire = "byName"></bean>
+   <bean id = "productsRepositoryImpl" class = "com.easydoordelivery.repository.impl.ProductsRepositoryImpl" autowire = "byName" ></bean>
+   <bean id = "customersRepositoryImpl" class = "com.easydoordelivery.repository.impl.CustomersRepositoryImpl" autowire = "byName"></bean>
+   <bean id = "employeesRepositoryImpl" class = "com.easydoordelivery.repository.impl.EmployeesRepositoryImpl" autowire = "byName"></bean>
+   <bean id = "orderDetailsRepositoryImpl" class = "com.easydoordelivery.repository.impl.OrderDetailsRepositoryImpl" autowire = "byName"></bean>
+   <bean id = "ordersRepositoryImpl" class = "com.easydoordelivery.repository.impl.OrdersRepositoryImpl" autowire = "byName"></bean>
+   <bean id = "shippersRepositoryImpl" class = "com.easydoordelivery.repository.impl.ShippersRepositoryImpl" autowire = "byName"></bean> 
+   
+   
+   <bean id ="genericDB" class = "com.easydoordelivery.repository.impl.GenericDatabaseOperation" ></bean>
+   
+   <bean id ="auditLogInterceptor" class = "com.easydoordelivery.util.AuditLogInterceptor" ></bean> 
+   
+   <bean id = "suppliersService" class = "com.easydoordelivery.service.impl.SuppliersServiceImpl"></bean>
+   <bean id = "categoriesService" class = "com.easydoordelivery.service.impl.CategoriesServiceImpl" ></bean>
+   <bean id = "productsService" class = "com.easydoordelivery.service.impl.ProductsServiceImpl" ></bean>
+    <bean id = "customersService" class = "com.easydoordelivery.service.impl.CustomersServiceImpl" ></bean>
+   <bean id = "employeesService" class = "com.easydoordelivery.service.impl.EmployeesServiceImpl" ></bean>
+   <bean id = "orderDetailsService" class = "com.easydoordelivery.service.impl.OrderDetailsServiceImpl" ></bean>
+   <bean id = "ordersService" class = "com.easydoordelivery.service.impl.OrdersServiceImpl" ></bean>
+   <bean id = "shippersService" class = "com.easydoordelivery.service.impl.ShippersServiceImpl" ></bean>
+      
+</beans>
